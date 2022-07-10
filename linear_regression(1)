@@ -1,0 +1,37 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+df=pd.read_csv("C:\\Users\\y20cs170\\Desktop\\data.csv")
+x=df['col1']
+y=df['col2']
+def summation(l):
+    sum=0
+    for i in l:
+        sum=sum+i
+    return sum
+sumx=summation(x)
+print('sum of x values=',sumx)
+sumy=summation(y)
+print('sum of y values=',sumy)
+sumxx=summation(x*x)
+print('sum of x2 values=',sumxx)
+sumxy=summation(x*y)
+print('sum of xy values=',sumxy)
+slope=((len(x)*sumxy)-(sumx*sumy))/((len(x)*sumxx)-(sumx)**2)
+print(slope)
+intercept=((sumxx*sumy)-(sumx*sumxy))/((len(x)*sumxx)-(sumx)**2)
+print(intercept)
+yexp=slope*x+intercept
+ycal=df['col2']
+plt.plot(x,ycal)
+plt.scatter(x,ycal)
+plt.plot(x,yexp)
+plt.scatter(x,yexp)
+plt.show()
+
+output:
+sum of x values= 502
+sum of y values= 528
+sum of x2 values= 30304
+sum of xy values= 31432
+0.965279410612117
+4.34297358727173
