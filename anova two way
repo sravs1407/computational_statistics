@@ -1,0 +1,60 @@
+d=pd.read_excel("/content/data.csv.xlsx")
+df=pd.DataFrame(d)
+t1sq=sum(df.loc[0])**2
+t2sq=sum(df.loc[1])**2
+t3sq=sum(df.loc[2])**2
+b1sq=sum(df['b1'])**2
+b2sq=sum(df['b2'])**2
+b3sq=sum(df['b3'])**2
+b4sq=sum(df['b4'])**2
+g=sum(df.loc[0])+sum(df.loc[1])+sum(df.loc[2])
+tisq=t1sq+t2sq+t3sq
+bjsq=b1sq+b2sq+b3sq+b4sq
+rss=0
+c=0
+h=0
+for i in df.loc[0]:
+  rss+=i**2
+  c=c+1
+  h+=1
+for i in df.loc[1]:
+  rss+=i**2
+  c+=1
+for i in df.loc[2]:
+  rss+=i**2
+  c+=1
+cf=g**2/c
+stsq=rss-cf
+k=c//h
+strsq=(tisq/h)-cf
+sbsq=(bjsq/k)-cf
+sesq=stsq-sbsq-strsq
+num1=strsq/(k-1)
+num2=sbsq/(h-1)
+den=sesq/((k-1)*(h-1))
+ftr=num1/den
+fb=num2/den
+print("cal value for treatments",ftr)
+print("cal value for blocks",fb)
+l=0.05
+ftrtab=stats.f.ppf(1-l,k-1,(k-1)*(h-1))
+fbtab=stats.f.ppf(1-l,h-1,(k-1)*(h-1))
+print("tab value for treatments",ftrtab)
+print("tab value for blocks",fbtab)
+if ftr<ftrtab:
+  print("there is homogenity among treatments")
+else:
+  print("there is no homogenity among treatments")
+if fb<fbtab:
+  print("there is homogenity among blocks")
+else:
+  print("there is no homogenity among blocks")
+
+'''output:
+
+cal value for treatments 3.230769230769231
+cal value for blocks 3.4615384615384617
+tab value for treatments 5.143252849784718
+tab value for blocks 4.757062663089414
+there is homogenity among treatments
+there is homogenity among blocks'''
