@@ -1,0 +1,43 @@
+fa=[13,10,8,11,8]
+fb=[13,11,14,14]
+fc=[4,1,3,4,2,4]
+ati=sum(fa)
+print(ati)
+bti=sum(fb)
+print(bti)
+cti=sum(fc)
+print(cti)
+ti=ati+bti+cti
+a=len(fa)
+print(a)
+len_fb=len(fb)
+len_fc=len(fc)
+tisq_ni=(ati*ati/a)+(bti*bti/len_fb)+(cti*cti/len_fc)
+print(tisq_ni)
+print(ti)
+rss=0
+for i in fa:
+  rss+=i**2
+for i in fb:
+  rss+=i**2
+for i in fc:
+  rss+=i**2
+print(rss)
+len=len(fa)+len(fb)+len(fc)
+cf=ti**2/len
+print(cf)
+sst=rss-cf
+sstr=tisq_ni-cf
+sse=sst-sstr
+doftr=2
+dofe=len-3
+msos=sstr/doftr
+msose=sse/dofe
+if msos>msose:
+  f=msos/msose
+else:
+  f=msose/msos
+print(f)
+los=0.05
+tab=stats.f.ppf(1-los,doftr,dofe)
+print(tab)
